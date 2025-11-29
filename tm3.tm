@@ -1,6 +1,6 @@
 alphabet: {0, 1, 2, x, a, b, c}
 start: q0
-q0 (0 -> x, R q1) (1 -> 1, R q0) (2 -> 2, R q0) (x -> x, R q0) (_ -> _, L q3)
+q0 (0 -> x, R q1) (1 -> 1, R q0) (2 -> 2, R q0) (x -> x, R q0) (_ -> _, L q13)
 q1 (0 -> 0, R q1) (1 -> 1, R q1) (2 -> 2, R q1) (x -> x, R q1) (a -> a, R q1) (b -> b, R q1) (c -> c, R q1) (_ -> a, L q2)
 q2 (0 -> 0, L q2) (1 -> 1, L q2) (2 -> 2, L q2) (x -> x, L q2) (a -> a, L q2) (b -> b, L q2) (c -> c, L q2) (_ -> _, R q0)
 q3 (1 -> x, R q4) (0 -> 0, L q3) (2 -> 2, L q3) (x -> x, L q3) (_ -> _, R q6)
