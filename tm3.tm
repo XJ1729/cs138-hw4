@@ -1,4 +1,4 @@
-alphabet: {0, 1, 2, x, a, b, c}
+alphabet: {0, 1, 2, x, y, z}
 start: q0
 q0 (_ -> _, R q8) (0 -> x, R q1) (1 -> _, R q8) (2 -> _, R q8) (x -> x, R q0) (y -> y, R q0) (z -> z, R q0)
 q1 (1 -> y, L q2) (0 -> 0, R q1) (2 -> 2, R q1) (x -> x, R q1) (y -> y, R q1) (z -> z, R q1) (_ -> _, R q8)
