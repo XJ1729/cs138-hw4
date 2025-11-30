@@ -8,7 +8,7 @@ q0c (0 -> 0, R q0c)   (1 -> 1, R q0c)   (2 -> 2, R q0c)   (# -> #, R q0c)   (_ -
 q1 (x -> _, R q2)    (y -> y, R qyl)   (_ -> _, R qF)
 q2 (y -> _, R q3) (x -> x, R q2) (z -> z, R q2) (# -> _, R q2) (_ -> _, R qF)
 q3 (x -> _, R q2) (y -> y, R q4) (z -> z, R q3) (# -> _, R q3) (_ -> _, R qF)
-qyl (y -> y, R q5) (x -> x, R qyl) (z -> z, R qyl) (# -> _, R qyl) (_ -> _, R qF)
+qyl (y -> y, R q5) (x -> x, R qyl) (z -> z, R qyl) (# -> _, R qyl) (_ -> _, R q5)
 q5 (y -> _, R q6) (x -> x, R q5) (z -> z, R q5) (# -> _, R q5) (_ -> _, R qF)
 q6 (z -> _, R q7) (x -> x, R q6) (y -> y, R q6) (# -> _, R q6) (_ -> _, R qF)
 q7 (y -> _, R q6) (z -> z, R qA) (x -> x, R q7) (# -> _, R q7) (_ -> _, R qF)
