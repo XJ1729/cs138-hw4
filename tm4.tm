@@ -8,6 +8,6 @@ qFZ (x -> x, R qFZ) (0 -> x, R qMZ) (1 -> 1, R qZD) (_ -> _, R qFZ)
 qMZ (x -> x, R qMZ) (0 -> 0, R qMZ) (y -> y, R qMZ) (1 -> y, L qBL) (_ -> _, R qF) 
 qBL (y -> y, L qBL) (1 -> 1, L qBL) (x -> x, L qBL) (0 -> 0, L qBL) (_ -> _, R qRS)
 qZD (1 -> 1, R qCR) (y -> y, R qCR) (_ -> _, R qCR)
-qCR (y -> y, R qCR) (1 -> 1, L qCL) (1 -> 1, L qCL)
+qCR (y -> y, R qCR) (1 -> 1, L qCL) (_ -> _, L accept)
 qCL (y -> y, L qCL) (1 -> 1, L qCL) (x -> 0, L qCL) (0 -> 0, L qCL) (_ -> _, R qRS)
 qF
