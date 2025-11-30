@@ -1,6 +1,9 @@
-alphabet: {0, 1, x, y}
+alphabet: {0, 1, x, y, #}
 start: q0
-q0 (0 -> x, R q1) (x -> x, R q0) (y -> y, R q0) (1 -> _, R q4) (_ -> _, R q3)
-q1 (1 -> y, L q2) (0 -> 0, R q1) (x -> x, R q1) (y -> y, R q1) (_ -> _, R q4)
-q2 (0 -> 0, L q2) (1 -> 1, L q2) (x -> x, L q2) (y -> y, L q2) (_ -> _, R q0)
-q3 (y -> y, R q3) (_ -> _, R accept) (1 -> _, R q4)
+q0 (0 -> 0, R q0a) (1 -> 1, R q0b) (_ -> _, R q1ml)
+q0a (0 -> 0, R q0a) (1 -> 1, R q0a) (_ -> x, L q0)
+q0b (0 -> 0, R q0b) (1 -> 1, R q0b) (_ -> y, L q0)
+q1ml (0 -> 0, L q1ml) (1 -> 1, L q1ml) (x -> x, L q1ml) (y -> y, L q1ml) (_ -> _, R q2)
+q2 (x -> _, R q3) (_ -> _, R qF)
+q3 (y -> _, R q2) (_ -> _, R qA)
+qA (_ -> _, R accept)
