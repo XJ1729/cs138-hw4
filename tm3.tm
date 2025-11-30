@@ -1,9 +1,14 @@
 alphabet: {0, 1, 2, x, y, z, #}
 start: q0
-q0 (0 -> x, R q1)  (1 -> 1, R qc1) (2 -> 2, R qc2) (x -> x, R q0) (y -> y, R q0) (z -> z, R q0) (_ -> _, R qF)
-q1 (1 -> y, L q0)  (0 -> 0, R q1) (2 -> 2, R q1) (x -> x, R q1) (y -> y, R q1) (z -> z, R q1) (_ -> _, R qF)
-qc1 (1 -> y, R q2) (x -> x, R qc1) (y -> y, R qc1) (z -> z, R qc1) (_ -> _, R qF)
-q2 (2 -> z, L qc1) (0 -> 0, R q2) (1 -> 1, R q2) (x -> x, R q2) (y -> y, R q2) (z -> z, R q2) (_ -> _, R qF)
-qc2 (2 -> z, R q_accept) (0 -> 0, R qc2) (1 -> 1, R qc2) (x -> x, R qc2) (y -> y, R qc2) (z -> z, R qc2) (_ -> _, R qF)
+q0 (0 -> #, R q0a)   (1 -> #, R q0b)   (2 -> #, R q0c)   (# -> #, R q0)   (_ -> _, R q1)
+q0a (_ -> x, R q0)   (0 -> 0, R q0a)   (1 -> 1, R q0a)   (2 -> 2, R q0a)   (# -> #, R q0a)
+q0b (_ -> y, R q0)   (0 -> 0, R q0b)   (1 -> 1, R q0b)   (2 -> 2, R q0b)   (# -> #, R q0b)
+q0c (_ -> z, R q0)   (0 -> 0, R q0c)   (1 -> 1, R q0c)   (2 -> 2, R q0c)   (# -> #, R q0c)
+q1 (x -> _, R q2)    (y -> y, R qyl)  (_ -> _, R qF)
+q2 (y -> _, R q3)    (x -> x, R q2)   (z -> z, R q2)   (# -> #, R q2)   (_ -> _, R qF)
+q3 (x -> _, R q2)    (y -> y, R q4)    (z -> z, R q3)   (# -> #, R q3)   (_ -> _, R qF)
+qyl (y -> y, R q5)  (x -> x, R qyl)  (z -> z, R qyl)  (# -> #, R qyl)  (_ -> _, R qF)
+q5 (y -> _, R q6)    (x -> x, R q5)   (z -> z, R q5)   (# -> #, R q5)   (_ -> _, R qF)
+q6 (z -> _, R q7)    (x -> x, R q6)   (y -> y, R q6)   (# -> #, R q6)   (_ -> _, R qF)
+q7 (y -> _, R q6)    (z -> z, R qA)  (x -> x, R q7)   (# -> #, R q7)   (_ -> _, R qF)
 qA (_ -> _, R accept)
-qF
