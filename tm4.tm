@@ -1,13 +1,13 @@
 alphabet: {0, 1, x, X, y}
 start: q0
-q0 (0 -> 0, R q01) (1 -> 1, R qF) (_ -> _, R accept) 
-q01 (0 -> 0, R q01) (1 -> 1, L q0B) (_ -> _, R qF) 
-q0B (0 -> 0, L q0B) (_ -> _, R qRS) 
-qRS (0 -> 0, R qFZ) (x -> x, R qFZ) (1 -> 1, R qZD) (_ -> _, R qFZ)
-qFZ (x -> x, R qFZ) (0 -> x, R qMZ) (1 -> 1, R qZD) (_ -> _, R qFZ)
-qMZ (x -> x, R qMZ) (0 -> 0, R qMZ) (y -> y, R qMZ) (1 -> y, L qBL) (_ -> _, R qF) 
-qBL (y -> y, L qBL) (1 -> 1, L qBL) (x -> x, L qBL) (0 -> 0, L qBL) (_ -> _, R qRS)
-qZD (1 -> 1, R qCR) (y -> y, R qCR) (_ -> _, R qCR)
-qCR (y -> y, R qCR) (1 -> 1, L qCL) (_ -> _, L accept)
-qCL (y -> y, L qCL) (1 -> 1, L qCL) (x -> 0, L qCL) (0 -> 0, L qCL) (_ -> _, R qRS)
+q0 (_ -> _, R accept) (0 -> 0, R q01) (1 -> 1, R qF)
+q01 (0 -> 0, R q01) (1 -> X, R qRS) (_ -> _, R qF)
+qRS (x -> x, R qRS) (0 -> x, R qP) (1 -> 1, R qZD) (_ -> _, R qRS)
+qP (x -> x, R qP) (0 -> 0, R qP) (y -> y, R qP) (X -> X, R qC) (1 -> 1, R qC) (_ -> _, R qF)
+qC (y -> y, R qC) (1 -> X, L qB) (_ -> _, R qF)
+qB (X -> y, L qn) (y -> y, L qB) (1 -> 1, L qB) (x -> x, L qB) (0 -> 0, L qB) (_ -> _, R qRS)
+qn (x -> x, R qRS) (0 -> 0, R qRS) (1 -> 1, R qZD) (_ -> _, R qRS)
+qZD (y -> y, R qCR) (X -> X, R qCR) (1 -> 1, R qCR) (_ -> _, R qCR)
+qCR (y -> y, R qCR) (X -> X, R qCR) (1 -> 1, L qCL) (_ -> _, L accept)
+qCL (y -> y, L qCL) (X -> X, L qCL) (1 -> 1, L qCL) (x -> 0, L qCL) (0 -> 0, L qCL) (_ -> _, R qRS)
 qF
