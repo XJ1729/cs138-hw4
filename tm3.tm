@@ -10,5 +10,5 @@ qC01y (y -> _, L qC01) (0 -> 0, R qC01y) (1 -> 1, R qC01y) (2 -> 2, R qC01y) (x 
 qC01x (x -> _, L qC01) (0 -> 0, R qC01x) (1 -> 1, R qC01x) (2 -> 2, R qC01x) (y -> y, R qC01x) (Y -> Y, R qC01x) (z -> z, R qC01x) (_ -> _, R qC12)  
 qC12 (Y -> _, R qC12z) (z -> _, R qC12y) (_ -> _, R qF) (x -> x, R qC12)
 qC12z (z -> _, L qC12) (0 -> 0, R qC12z) (1 -> 1, R qC12z) (2 -> 2, R qC12z) (y -> y, R qC12z) (Y -> Y, R qC12z) (x -> x, R qC12z) (_ -> _, R qF) 
-qC12y (Y -> _, L qC12) (0 -> 0, R qC12y) (1 -> 1, R qC12y) (2 -> 2, R qC12y) (y -> y, R qC12y) (z -> z, R qC12y) (x -> x, R qC12y) (_ -> _, R qA) 
+qC12y (Y -> _, L qC12) (0 -> 0, R qC12y) (1 -> 1, R qC12y) (2 -> 2, R qC12y) (y -> y, R qC12y) (z -> z, R qC12y) (x -> x, R qC12y) (_ -> _, R accept) 
 qF
