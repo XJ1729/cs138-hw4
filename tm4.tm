@@ -1,20 +1,23 @@
-alphabet: {0, 1, x, X, y, #}
+alphabet: {0, 1, x, y, #}
 start: q0
 
-q0 (0 -> #, R q01) (_ -> _, R accept)
+// mark 0
+q0 (0 -> #, R q1) (_ -> _, R accept)
 
-q01 (0 -> 0, R q01) (# -> #, R q01) (1 -> X, R qRS)
+// mark 1
+q1 (0 -> 0, R q1) (x -> x, R q1) (y -> y, R q1) (1 -> y, R q1M)
 
-qRS  (x -> x, R qRS) (0 -> x, R qP) (# -> x, R qP) (1 -> 1, R qZD)
+// marked the one, go back to check for zeroes or just go back
+q1M (1 -> 1, L qB) (_ -> _, L qC0)
 
-qP (x -> x, R qP) (0 -> 0, R qP) (# -> #, R qP) (y -> y, R qP) (X -> X, R qC) (1 -> 1, R qC) 
+// go back
+qB (0 -> 0, L qB) (1 -> 1, L qB) (x -> x, L qB) (y -> y, L qB) (# -> #, R qF0)
 
-qC (y -> y, R qC) (1 -> X, L qB)
+// find zero again
+qF0 (x -> x, R qF0) (y -> y, L qR) (0 -> x, R q1)
 
-qB (X -> y, L qB) (y -> y, L qB) (1 -> 1, L qB) (x -> x, R qRS) (# -> #, R qRS) (0 -> 0, R qRS)
+// reset 0s
+qR (x -> 0, L qR) (# -> #, R q1)
 
-qZD (y -> y, R qCR) (X -> X, R qCR) (1 -> 1, R qCR) (_ -> _, R qCR)
-
-qCR (y -> y, R qCR) (X -> X, R qCR) (1 -> 1, L qCL) (_ -> _, L accept)
-
-qCL (y -> y, L qCL) (X -> X, L qCL) (1 -> 1, L qCL) (x -> 0, L qCL) (0 -> 0, L qCL) (# -> #, R qRS)
+// no 1s left to mark, if there are zeros left, reject; otherwise accept
+qC0 (y -> y, L qC0) (x -> x, L qC0) (# -> #, R accept)
