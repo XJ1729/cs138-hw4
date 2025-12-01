@@ -4,10 +4,10 @@ start: qS
 qS (0 -> a, L q0) (1 -> b, L q0) (2 -> c, L q0) 
 
 // iterate from start of string to mark zero
-q0 (a -> #, R q0D) (0 -> *, R q0D) (# -> #, R q0D) (b -> b, R q0) (c -> c, R q0) (1 -> 1, R q0) (2 -> 2, R q0) (_ -> _, L q0D)
+q0 (a -> #, R q0D) (0 -> *, R q0D) (# -> #, R q0D) (b -> b, R q0) (c -> c, R q0) (1 -> 1, R q0) (2 -> 2, R q0) (_ -> _, L qN0)
 
 // marked a zero, move to end of string; if no zeroes left, check for ones
-q0D (# -> #, R q0D) (* -> *, R q0D) (b -> b, R q0D) (c -> c, R q0D) (0 -> 0, R q0D) (1 -> 1, R q0D) (2 -> 2, R q0D) (_ -> _, L qN0)
+q0D (# -> #, R q0D) (* -> *, R q0D) (b -> b, R q0D) (c -> c, R q0D) (0 -> 0, R q0D) (1 -> 1, R q0D) (2 -> 2, R q0D) (_ -> _, L q1)
 
 // gone all the way to end of string, iterate left to start marking ones; if 0s marked but no 1s to mark = reject
 q1 (b -> #, L q1D) (1 -> *, L q1D) (* -> *, L q2) (c -> c, L q1) (0 -> 0, L q1) (2 -> 2, L q1) 

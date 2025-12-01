@@ -7,7 +7,7 @@ qP (x -> x, R qP) (0 -> 0, R qP) (y -> y, R qP) (X -> X, R qC) (1 -> 1, R qC) (_
 qC (y -> y, R qC) (1 -> X, L qB) (_ -> _, R qF)
 qB (X -> y, L qn) (y -> y, L qB) (1 -> 1, L qB) (x -> x, R qRS) (0 -> 0, R qRS) (_ -> _, R qRS)
 qn (x -> x, R qRS) (0 -> 0, R qRS) (1 -> 1, R qZD) (_ -> _, R qRS)
-qZD   (y -> y, R qCR) (X -> X, R qCR) (1 -> 1, R qCR) (_ -> _, R qCR)
-qCR   (y -> y, R qCR) (X -> X, R qCR) (1 -> 1, L qCL) (_ -> _, L accept)
-qCL   (y -> y, L qCL) (X -> X, L qCL) (1 -> 1, L qCL) (x -> 0, L qCL) (0 -> 0, L qCL) (_ -> _, R qRS)
+qZD (y -> y, R qCR) (X -> X, R qCR) (1 -> 1, R qCR) (_ -> _, R qCR)
+qCR (y -> y, R qCR) (X -> X, R qCR) (1 -> 1, L qCL) (_ -> _, L accept)
+qCL (y -> y, L qCL) (X -> X, L qCL) (1 -> 1, L qCL) (x -> 0, L qCL) (0 -> 0, L qCL) (_ -> _, R qRS)
 qF
