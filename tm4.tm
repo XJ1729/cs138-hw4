@@ -1,7 +1,7 @@
 alphabet: {0, 1, x, X, y, #}
 start: q0
 
-q0 (0 -> #, R q01) 
+q0 (0 -> #, R q01) (_ -> _, R accept)
 
 q01 (0 -> 0, R q01) (# -> #, R q01) (1 -> X, R qRS)
 
