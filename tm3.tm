@@ -1,14 +1,35 @@
-alphabet: {0, 1, 2, x, y, Y, z}
-start: q0
-q0 (0 -> 0, R q0a) (1 -> 1, R q0b) (2 -> 2, R q0c) (_ -> _, R qC01)
-q0a (0 -> 0, R q0a) (1 -> 1, R q0a) (2 -> 2, R q0a) (_ -> x, L q0) (x -> x, R q0a) (y -> y, R q0a) (Y -> Y, R q0a) (z -> z, R q0a)
-q0b (0 -> 0, R q0b) (1 -> 1, R q0b) (2 -> 2, R q0b) (_ -> y, R q0b2)
-q0b2 (_ -> Y, L q0) (0 -> 0, R q0b2) (1 -> 1, R q0b2) (2 -> 2, R q0b2) (x -> x, R q0b2) (y -> y, R q0b2) (Y -> Y, R q0b2) (z -> z, R q0b2)
-q0c (0 -> 0, R q0c) (1 -> 1, R q0c) (2 -> 2, R q0c) (_ -> z, L q0) (x -> x, R q0c) (y -> y, R q0c) (Y -> Y, R q0c) (z -> z, R q0c)
-qC01 (x -> _, R qC01y) (y -> _, R qC01x) (_ -> _, R qF) (Y -> Y, R qC01) (z -> z, R qC01)
-qC01y (y -> _, L qC01) (0 -> 0, R qC01y) (1 -> 1, R qC01y) (2 -> 2, R qC01y) (x -> x, R qC01y) (Y -> Y, R qC01y) (z -> z, R qC01y) (_ -> _, R qF)
-qC01x (x -> _, L qC01) (0 -> 0, R qC01x) (1 -> 1, R qC01x) (2 -> 2, R qC01x) (y -> y, R qC01x) (Y -> Y, R qC01x) (z -> z, R qC01x) (_ -> _, R qC12)  
-qC12 (Y -> _, R qC12z) (z -> _, R qC12y) (_ -> _, R qF) (x -> x, R qC12)
-qC12z (z -> _, L qC12) (0 -> 0, R qC12z) (1 -> 1, R qC12z) (2 -> 2, R qC12z) (y -> y, R qC12z) (Y -> Y, R qC12z) (x -> x, R qC12z) (_ -> _, R qF) 
-qC12y (Y -> _, L qC12) (0 -> 0, R qC12y) (1 -> 1, R qC12y) (2 -> 2, R qC12y) (y -> y, R qC12y) (z -> z, R qC12y) (x -> x, R qC12y) (_ -> _, R accept) 
-qF
+alphabet: {0, 1, 2, a, b, c, *, #}
+start: qS
+// mark start
+qS (0 -> a, L q0) (1 -> b, L q0) (2 -> c, L q0) 
+
+// iterate from start of string to mark zero
+q0 (a -> #, R q0D) (0 -> *, R q0D) (# -> #, R q0D) (b -> b, R q0) (c -> c, R q0) (1 -> 1, R q0) (2 -> 2, R q0) (_ -> _, L q0D)
+
+// marked a zero, move to end of string; if no zeroes left, check for ones
+q0D (# -> #, R q0D) (* -> *, R q0D) (b -> b, R q0D) (c -> c, R q0D) (0 -> 0, R q0D) (1 -> 1, R q0D) (2 -> 2, R q0D) (_ -> _, L qN0)
+
+// gone all the way to end of string, iterate left to start marking ones; if 0s marked but no 1s to mark = reject
+q1 (b -> #, L q1D) (1 -> *, L q1D) (* -> *, L q2) (c -> c, L q1) (0 -> 0, L q1) (2 -> 2, L q1) 
+
+// done marking ones, go all the way to the start
+q1D (# -> #, R q2) (b -> b, L q2) (c -> c, L q2) (* -> *, L q1D) (0 -> 0, L q1D) (1 -> 1, L q1D) (2 -> 2, L q1D)
+
+// start marking twos; if 0s and 1s marked but no two = reject
+q2 (c -> #, R q2D) (2 -> *, R q2D) (b -> b, R q2) (* -> *, R q2) (0 -> 0, R q2) (1 -> 1, R q2)
+
+// done marking twos, move back to the start (marking zeroes again)
+q2D (* -> *, L q2D) (0 -> 0, L q2D) (1 -> 1, L q2D) (b -> b, L q0) (c -> c, L q0) (# -> #, R q0)
+
+// check for ones (if no zeroes, check for ones and make sure there is at least a one left)
+// if a one is present (iterate all the way to #), move to q1N0
+qN0 (1 -> *, L qH1) (b -> #, L qH1) (c -> c, L qN0) (2 -> 2, L qN0) (* -> *, L qN0) (# -> #, R qC2)
+
+// found a 1, check for matching twos
+qH1 (1 -> 1, L qH1) (2 -> 2, L qH1) (* -> *, L qH1) (# -> #, R qH2) (b -> b, L qH2) (c -> c, L qH2) 
+
+// matching the twos
+qH2 (2 -> *, L qH1D) (c -> #, R qH1D) (1 -> 1, R qH2) (b -> b, R qH2) (* -> *, R qH2) 
+
+// make sure there is a two in the string after finishing all ones
+qC2 (2 -> 2, R accept) (c -> c, R accept) (1 -> 1, R qC2) (b -> b, R qC2) (* -> *, R qC2)
