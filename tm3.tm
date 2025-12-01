@@ -1,7 +1,9 @@
 alphabet: {0, 1, 2, a, b, c, *, #}
 start: qS
 // mark start
-qS (0 -> a, L q0) (1 -> b, L q0) (2 -> c, L q0) 
+qS (0 -> a, R qS1) (1 -> b, R qS1) (2 -> c, R qS1) 
+
+qS1 (0 -> 0, L q0) (1 -> 1, L q0) (2 -> 2, L q0)
 
 // iterate from start of string to mark zero
 q0 (a -> #, R q0D) (0 -> *, R q0D) (# -> #, R q0D) (b -> b, R q0) (c -> c, R q0) (1 -> 1, R q0) (2 -> 2, R q0) (_ -> _, L qN0)
